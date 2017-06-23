@@ -41,15 +41,22 @@ namespace TechJobs.Data
          */
         public List<Job> FindByValue(string value)
         {
-            var results = from j in Jobs
-                          where j.Employer.Contains(value)
-                          || j.Location.Contains(value)
-                          || j.Name.ToLower().Contains(value.ToLower())
-                          || j.CoreCompetency.Contains(value)
-                          || j.PositionType.Contains(value)
-                          select j;
-
-            return results.ToList();
+            if (String.IsNullOrEmpty(value))
+            {
+                var results = Jobs;
+                return results.ToList();
+            }
+            else
+            {
+                var results = from j in Jobs
+                              where j.Employer.Contains(value)
+                              || j.Location.Contains(value)
+                              || j.Name.ToLower().Contains(value.ToLower())
+                              || j.CoreCompetency.Contains(value)
+                              || j.PositionType.Contains(value)
+                              select j;
+                return results.ToList();
+            }
         }
 
 
@@ -59,11 +66,19 @@ namespace TechJobs.Data
          */
         public List<Job> FindByColumnAndValue(JobFieldType column, string value)
         {
-            var results = from j in Jobs
-                          where GetFieldByType(j, column).Contains(value)
-                          select j;
+            if (String.IsNullOrEmpty(value))
+            {
+                var results = Jobs;
+                return results.ToList();
+            }
+            else
+            {
+                var results = from j in Jobs
+                              where GetFieldByType(j, column).Contains(value)
+                              select j;
 
-            return results.ToList();
+                return results.ToList();
+            }
         }
 
         /**

@@ -1,4 +1,6 @@
-﻿namespace TechJobs.Models
+﻿using System;
+
+namespace TechJobs.Models
 {
     public class JobField
     {
@@ -21,7 +23,7 @@
         // Provide a basic case-insensitive search
         public bool Contains(string testValue)
         {
-            return Value.ToLower().Contains(testValue.ToLower());
+                return Value.ToLower().Contains(testValue.ToLower());
         }
 
         public override string ToString()
